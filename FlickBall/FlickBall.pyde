@@ -15,6 +15,8 @@ def setup():
     rect(200, 0, width-200, height)
 
     orbs = []
+    Orb.set_vars(width, height)
+    Player.set_vars(width, height)
     player = Player()
 
     
