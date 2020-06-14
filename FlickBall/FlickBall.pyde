@@ -1,8 +1,11 @@
 # ideas:
 # black hole version/animation
 
-import Player
-import Orb
+from player import Player
+from orb import Orb
+
+player = None
+orbs = None
 
 def setup():
     size(1500, 500)
@@ -14,6 +17,8 @@ def setup():
     fill(0, 100, 200)
     rect(200, 0, width-200, height)
 
+    global orbs
+    global player
     orbs = []
     Orb.set_vars(width, height)
     Player.set_vars(width, height)
@@ -21,12 +26,15 @@ def setup():
 
     
 def draw():
-    while(not player.resetting):
-        fill(255, 0, 0)
-        circle(100, 100, 100)
+    global player
+    global orbs
+    while player.playing:
+        player.update()
         
-        for i in range(40):
-            fill(random(100, 255), random(100, 255), random(100, 255))
+        for num in range(40):
             orb = Orb()
             orbs.append(orb)
-        player.resetting = true
+            
+        for o in orbs:
+            o.update()
+        #player.playing = True
