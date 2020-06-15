@@ -7,14 +7,15 @@ class Player():
     
     @staticmethod
     def set_vars(width, height):
+        global player_start_x, player_start_y, player_size
         player_start_x = 50
         player_start_y = height/2
-        player_size = 100
+        player_size = 50
     
     def __init__(self):
-        self.x = Player.player_start_x
-        self.y = Player.player_start_y
-        self.size = Player.player_size
+        self.x = player_start_x
+        self.y = player_start_y
+        self.size = player_size
         self.playing = True
         
     def update(self):

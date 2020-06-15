@@ -8,6 +8,7 @@ class Orb():
     
     @staticmethod
     def set_vars(width, height):
+        global board_start_x, board_end_x, board_start_y, board_end_y, orb_size
         board_start_x = 200
         board_end_x = width - 50
         board_start_y = 50
@@ -15,10 +16,12 @@ class Orb():
         orb_size = 20
 
     def __init__(self):
-        self.x = random(Orb.board_start_x, Orb.board_end_x)
-        self.y = random(Orb.board_start_y, Orb.board_end_y)
-        self.size = Orb.orb_size
+        self.x = random(board_start_x, board_end_x)
+        self.y = random(board_start_y, board_end_y)
+        self.size = orb_size
+        self.color = [0, random(0, 255), random(0, 255)]
         
     def update(self):
-        fill(random(100, 255), random(100, 255), random(100, 255))
+        stroke(15)
+        fill(self.color[0], self.color[1], self.color[2])
         circle(self.x, self.y, self.size)
