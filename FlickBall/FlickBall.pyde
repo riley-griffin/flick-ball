@@ -12,13 +12,14 @@ sling = False
 p_mouse = (0,0)
 n_mouse = (0,0)
 orbs_per_level = 50
+camera_xy = (100, 100)
 
 def setup():
     size(1500, 500)
     background(50,150,255)
     fill(255, 255, 255)
     noStroke()
-    rect(0, 0, width - width * .85, height)
+    setup_rect()
 
     global orbs, player, orbs_per_level
     player = Player(width, height)
@@ -30,8 +31,9 @@ def draw():
     background(50,150,255)
     fill(255, 255, 255)
     noStroke()
-    rect(0, 0, width - width * .85, height)
-    global player, orbs, orbs_per_level
+    global player, orbs, orbs_per_level, camera_xy
+    translate(-player.x + camera_xy[0], -player.y + camera_xy[1])
+    setup_rect()
     show()
     if player.playing:
         update()
@@ -39,7 +41,12 @@ def draw():
         orbs = []
         player.resetting = False
         spawn_new_orbs(orbs_per_level)
-        
+
+def setup_rect():
+    fill(255)
+    rect(0, 0, width - width * .85, height*5)
+
+
 def update():
     global player, orbs
     player.update()
