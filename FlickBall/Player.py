@@ -9,6 +9,7 @@ class Player():
         self.vel_y = 0
         self.vel_x = 0
         self.resetting = False
+        self.score = 0
         
     def update(self):
         self.x += self.vel_x

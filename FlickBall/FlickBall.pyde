@@ -2,6 +2,9 @@
 # make the camera move with the dude as you go along
 # black hole version/animation
 # make the sky darken and have space as you get farther up
+# make some balls bigger than others maybe? would be more like agar.io, 
+    # and balls could get bigger in a radius around the origin
+    # so like every 10 degrees out they get bigger by 10 % or something...
 
 from player import Player
 from orb import Orb
@@ -12,7 +15,7 @@ sling = False
 p_mouse = (0,0)
 n_mouse = (0,0)
 orbs_per_level = 50
-camera_xy = (100, 100)
+camera_xy = (100, 250)
 
 def setup():
     size(1500, 500)
@@ -31,7 +34,7 @@ def draw():
     background(50,150,255)
     fill(255, 255, 255)
     noStroke()
-    global player, orbs, orbs_per_level, camera_xy
+    global player, orbs, orbs_per_level, camera_xy```
     translate(-player.x + camera_xy[0], -player.y + camera_xy[1])
     setup_rect()
     show()
@@ -41,6 +44,7 @@ def draw():
         orbs = []
         player.resetting = False
         spawn_new_orbs(orbs_per_level)
+    print(player.score)
 
 def setup_rect():
     fill(255)
@@ -51,7 +55,7 @@ def update():
     global player, orbs
     player.update()
     for o in orbs:
-        o.update(player.x, player.y)
+        o.update(player)
         
 def show():
     global player, orbs
@@ -60,10 +64,10 @@ def show():
         o.show()
         
 def spawn_new_orbs(num_orbs):
-    global orbs
+    global orbs, player
     orbs = []
     for num in range(num_orbs):
-        orb = Orb(width, height)
+        orb = Orb(width, height, player)
         orbs.append(orb)
 
 def mousePressed():
